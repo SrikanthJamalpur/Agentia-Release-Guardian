@@ -1,0 +1,20 @@
+# This is a sample .copado_exclude_autoresolve file
+# Lines starting with '#' are comments and are ignored by Copado
+# Use '**' to match any character across directory levels
+# Use '*' to match any character within a directory level
+# Use specific directory names and file patterns to match certain files
+# Copado Docs & Samples: https://docs.copado.com/articles/?readerUiPreview=1#!copado-ci-cd-publication/initialize-a-repository-from-the-cli-for-salesforce-source-format-pipeline/a/h3__1668367176
+# Exclude all Apex class files from auto-resolve
+**/classes/*.cls
+# Exclude all Apex trigger files from auto-resolve
+**/triggers/*.trigger
+# Exclude all component files from auto-resolve
+**/components/*.component
+# Exclude all Visualforce page files from auto-resolve
+**/pages/*.page
+# Exclude all Lightning component bundle directories from auto-resolve
+**/aura/**
+# Exclude all Lightning web component bundle directories from auto-resolve
+**/lwc/**
+# Exclude all Layouts
+# **/layouts/*.layout-meta.xml

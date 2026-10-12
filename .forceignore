@@ -1,0 +1,43 @@
+# List files or directories below to ignore them when running force:source:push, force:source:pull, and force:source:status
+# More information: https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_exclude_source.htm
+#
+
+package.xml
+
+# LWC configuration files
+**/jsconfig.json
+**/.eslintrc.json
+
+# LWC Jest
+**/__tests__/**
+
+node_modules/
+
+# These files are used to pre-create a folder structure
+# If they are part of a metadata folder Salesforce deployments will fail because .gitkeep is not metadata
+**/.gitKeep
+# Managed package Apex Classes are wholly protected and not versionable
+**/classes/*__*.*
+# Managed package Apex Triggers are wholly protected and not versionable
+**/triggers/*__*.*
+# Managed package Visualforce Pages are wholly protected and not versionable
+**/pages/*__*.*
+# Managed package Visualforce Components are wholly protected and not versionable
+**/components/*__*.*
+# Managed package Custom Metadata are wholly protected and not versionable
+**/customMetadata/*__*.*
+# Managed package Custom Permissions are wholly protected and not versionable
+**/customPermissions/*__*.*
+# Managed package Flexipages are wholly protected and not versionable
+**/flexipages/*__*.*
+# Managed package Flows are wholly protected and not versionable
+**/flows/*__*.*
+# Managed package Permission Sets are wholly protected and not versionable
+**/permissionsets/*__*.*
+# additional metadata types
+**/flowDefinitions/**
+**/staticresources/**
+**/documents/**
+#**/installedPackages/**
+#**/dashboards/**
+#**/reports/**
