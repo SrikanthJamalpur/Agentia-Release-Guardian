@@ -7,19 +7,27 @@ function analyzeRelease(scenario) {
   const dependencies = scenario.dependencies || {};
   const evidence = scenario.evidence || [];
 
-  const impacted = new Set(changes.map(c => c.component));
+  const changedComponents = changes.map(c => c.component);
+  const visited = new Set(changedComponents);
+  const impacted = new Set();
   const impactReasons = [];
+  const pending = [...new Set(changedComponents)].sort();
 
-  for (const component of [...impacted]) {
-    for (const dependent of dependencies[component] || []) {
-      if (!impacted.has(dependent)) {
-        impacted.add(dependent);
-        impactReasons.push({
-          component: dependent,
-          dependsOn: component,
-          reason: `${dependent} depends on changed component ${component}`
-        });
-      }
+  while (pending.length) {
+    const component = pending.shift();
+    const dependents = [...new Set(dependencies[component] || [])].sort();
+
+    for (const dependent of dependents) {
+      if (visited.has(dependent)) continue;
+
+      visited.add(dependent);
+      impacted.add(dependent);
+      pending.push(dependent);
+      impactReasons.push({
+        component: dependent,
+        dependsOn: component,
+        reason: `${dependent} depends on component ${component}`
+      });
     }
   }
 
@@ -65,7 +73,7 @@ function analyzeRelease(scenario) {
     scenario: scenario.name || "Unnamed scenario",
     decision,
     riskScore,
-    changedComponents: changes.map(c => c.component),
+    changedComponents,
     impactedComponents: [...impacted].sort(),
     dependencyFindings: impactReasons,
     evidenceSummary: {
