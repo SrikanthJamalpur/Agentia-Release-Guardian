@@ -1,0 +1,39 @@
+﻿{
+  "scenarios": [
+    {
+      "name": "Low-risk change with complete evidence",
+      "changes": [
+        { "component": "ContactValidation", "severity": "low" }
+      ],
+      "dependencies": {},
+      "evidence": [
+        { "name": "Unit tests", "status": "passed" },
+        { "name": "Regression tests", "status": "passed" }
+      ]
+    },
+    {
+      "name": "High-impact change with missing regression evidence",
+      "changes": [
+        { "component": "PricingService", "severity": "high" }
+      ],
+      "dependencies": {
+        "PricingService": ["OrderCalculator", "CheckoutFlow"]
+      },
+      "evidence": [
+        { "name": "Unit tests", "status": "passed" },
+        { "name": "Regression tests", "status": "missing" }
+      ]
+    },
+    {
+      "name": "Release with a failed required test",
+      "changes": [
+        { "component": "OrderTrigger", "severity": "medium" }
+      ],
+      "dependencies": {},
+      "evidence": [
+        { "name": "Unit tests", "status": "failed" },
+        { "name": "Regression tests", "status": "passed" }
+      ]
+    }
+  ]
+}
