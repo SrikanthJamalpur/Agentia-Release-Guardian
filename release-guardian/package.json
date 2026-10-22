@@ -1,0 +1,10 @@
+﻿{
+  "name": "agentia-release-guardian",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Explainable Salesforce release risk and evidence analysis",
+  "scripts": {
+    "guardian": "node src/cli.js",
+    "test": "node --test"
+  }
+}
