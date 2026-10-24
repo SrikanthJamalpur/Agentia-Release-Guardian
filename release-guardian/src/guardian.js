@@ -1,4 +1,4 @@
-"use strict";
+﻿"use strict";
 
 const SEVERITY_POINTS = { low: 5, medium: 12, high: 25 };
 const EVIDENCE_STATUSES = new Set(["passed", "failed", "missing", "not-run"]);
@@ -152,7 +152,7 @@ function analyzeRelease(scenario) {
   }
 
   const reasons = [];
-  if (failed.length) reasons.push(`${failed.length} required evidence check(s) failed`);
+  if (failed.length) reasons.push(`${failed.length} evidence check(s) failed`);
   if (missingCount) {
     reasons.push(evidence.length === 0
       ? "No evidence checks were provided"

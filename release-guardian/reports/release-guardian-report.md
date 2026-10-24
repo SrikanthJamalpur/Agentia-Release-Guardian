@@ -65,7 +65,7 @@
 
 ---
 
-# Release with a failed required test
+# Release with a failed test
 
 **Decision:** BLOCK
 **Risk score:** 12/100
@@ -91,6 +91,6 @@
 - Regression tests: passed
 
 ## Decision reasons
-- 1 required evidence check(s) failed
+- 1 evidence check(s) failed
 
 **Recommended next action:** Do not proceed until failed checks or blocking risks are resolved.

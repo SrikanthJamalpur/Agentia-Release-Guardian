@@ -50,7 +50,7 @@
                                        ]
                       },
                       {
-                          "name":  "Release with a failed required test",
+                          "name":  "Release with a failed test",
                           "changes":  [
                                           {
                                               "component":  "OrderTrigger",

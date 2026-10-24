@@ -103,9 +103,9 @@
     }
   },
   {
-    "name": "Release with a failed required test",
+    "name": "Release with a failed test",
     "report": {
-      "scenario": "Release with a failed required test",
+      "scenario": "Release with a failed test",
       "decision": "BLOCK",
       "riskScore": 12,
       "changedComponents": [
@@ -135,7 +135,7 @@
         "invalid": 0
       },
       "reasons": [
-        "1 required evidence check(s) failed"
+        "1 evidence check(s) failed"
       ],
       "recommendation": "Do not proceed until failed checks or blocking risks are resolved."
     }

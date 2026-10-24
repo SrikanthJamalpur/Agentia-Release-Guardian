@@ -233,6 +233,65 @@ test("failed evidence blocks even when numerical risk is below threshold", () =>
   assert.equal(result.riskScore, 5);
   assert.equal(result.decision, "BLOCK");
   assert.ok(
-    result.reasons.some(reason => reason.includes("required evidence check(s) failed"))
+    result.reasons.some(reason => reason.includes("evidence check(s) failed"))
   );
+});
+
+test("risk thresholds handle values below and exactly at boundaries", () => {
+  const makeScenario = (name, changes, dependencies = {}) => ({
+    name,
+    changes,
+    dependencies,
+    evidence: [{ name: "Unit tests", status: "passed" }]
+  });
+
+  const cases = [
+    {
+      scenario: makeScenario(
+        "Below HOLD",
+        [{ component: "A", severity: "medium" }],
+        { A: ["B", "C"] }
+      ),
+      riskScore: 32,
+      decision: "GO"
+    },
+    {
+      scenario: makeScenario(
+        "At HOLD",
+        [{ component: "A", severity: "low" }],
+        { A: ["B", "C", "D"] }
+      ),
+      riskScore: 35,
+      decision: "HOLD"
+    },
+    {
+      scenario: makeScenario("Below BLOCK", [
+        { component: "A", severity: "high" },
+        { component: "B", severity: "high" },
+        { component: "C", severity: "low" },
+        { component: "D", severity: "low" },
+        { component: "E", severity: "low" }
+      ]),
+      riskScore: 65,
+      decision: "HOLD"
+    },
+    {
+      scenario: makeScenario("At BLOCK", [
+        { component: "A", severity: "high" },
+        { component: "B", severity: "high" },
+        { component: "C", severity: "low" },
+        { component: "D", severity: "low" },
+        { component: "E", severity: "low" },
+        { component: "F", severity: "low" }
+      ]),
+      riskScore: 70,
+      decision: "BLOCK"
+    }
+  ];
+
+  for (const { scenario, riskScore, decision } of cases) {
+    const result = analyzeRelease(scenario);
+    assert.equal(result.riskScore, riskScore, scenario.name);
+    assert.equal(result.decision, decision, scenario.name);
+  }
 });
