@@ -204,3 +204,35 @@ test("CLI generates reports for every demo scenario", () => {
   assert.match(markdown, /- Passed: 2/);
   assert.match(markdown, /- Failed: 1/);
 });
+
+test("duplicate change entries contribute severity points per entry", () => {
+  const result = analyzeRelease({
+    name: "Duplicate change entries",
+    changes: [
+      { component: "AccountRule", severity: "low" },
+      { component: "AccountRule", severity: "low" }
+    ],
+    evidence: [{ name: "Unit tests", status: "passed" }]
+  });
+
+  assert.deepEqual(result.changedComponents, ["AccountRule"]);
+  assert.equal(result.riskScore, 10);
+  assert.equal(result.decision, "GO");
+});
+
+test("failed evidence blocks even when numerical risk is below threshold", () => {
+  const result = analyzeRelease({
+    name: "Failed evidence precedence",
+    changes: [{ component: "AccountRule", severity: "low" }],
+    evidence: [
+      { name: "Unit tests", status: "failed" },
+      { name: "Regression tests", status: "passed" }
+    ]
+  });
+
+  assert.equal(result.riskScore, 5);
+  assert.equal(result.decision, "BLOCK");
+  assert.ok(
+    result.reasons.some(reason => reason.includes("required evidence check(s) failed"))
+  );
+});
