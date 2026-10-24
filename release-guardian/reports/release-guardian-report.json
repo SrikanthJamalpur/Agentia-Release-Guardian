@@ -1,0 +1,143 @@
+[
+  {
+    "name": "Low-risk change with complete evidence",
+    "report": {
+      "scenario": "Low-risk change with complete evidence",
+      "decision": "GO",
+      "riskScore": 5,
+      "changedComponents": [
+        "ContactValidation"
+      ],
+      "impactedComponents": [],
+      "dependencyFindings": [],
+      "evidenceChecks": [
+        {
+          "name": "Unit tests",
+          "status": "passed"
+        },
+        {
+          "name": "Regression tests",
+          "status": "passed"
+        }
+      ],
+      "evidenceSummary": {
+        "total": 2,
+        "noEvidenceProvided": false,
+        "passed": 2,
+        "failed": 0,
+        "missing": 0,
+        "notRun": 0,
+        "unknown": 0,
+        "missingOrNotRun": 0,
+        "invalid": 0
+      },
+      "reasons": [
+        "Evidence is complete and the calculated risk is below the review threshold"
+      ],
+      "recommendation": "Proceed to the authorized release process; this analysis is not deployment approval."
+    }
+  },
+  {
+    "name": "High-impact change with missing regression evidence",
+    "report": {
+      "scenario": "High-impact change with missing regression evidence",
+      "decision": "HOLD",
+      "riskScore": 57,
+      "changedComponents": [
+        "PricingService"
+      ],
+      "impactedComponents": [
+        "CheckoutFlow",
+        "OrderCalculator"
+      ],
+      "dependencyFindings": [
+        {
+          "component": "CheckoutFlow",
+          "dependsOn": "OrderCalculator",
+          "impactType": "transitive",
+          "path": [
+            "PricingService",
+            "OrderCalculator",
+            "CheckoutFlow"
+          ],
+          "reason": "CheckoutFlow is a transitive downstream dependency of PricingService"
+        },
+        {
+          "component": "OrderCalculator",
+          "dependsOn": "PricingService",
+          "impactType": "direct",
+          "path": [
+            "PricingService",
+            "OrderCalculator"
+          ],
+          "reason": "OrderCalculator is a direct downstream dependency of PricingService"
+        }
+      ],
+      "evidenceChecks": [
+        {
+          "name": "Unit tests",
+          "status": "passed"
+        },
+        {
+          "name": "Regression tests",
+          "status": "missing"
+        }
+      ],
+      "evidenceSummary": {
+        "total": 2,
+        "noEvidenceProvided": false,
+        "passed": 1,
+        "failed": 0,
+        "missing": 1,
+        "notRun": 0,
+        "unknown": 0,
+        "missingOrNotRun": 1,
+        "invalid": 0
+      },
+      "reasons": [
+        "1 evidence check(s) missing or not run",
+        "2 unique downstream component(s) identified",
+        "Risk score 57/100 requires review"
+      ],
+      "recommendation": "Collect missing or valid evidence and review the impact before proceeding."
+    }
+  },
+  {
+    "name": "Release with a failed required test",
+    "report": {
+      "scenario": "Release with a failed required test",
+      "decision": "BLOCK",
+      "riskScore": 12,
+      "changedComponents": [
+        "OrderTrigger"
+      ],
+      "impactedComponents": [],
+      "dependencyFindings": [],
+      "evidenceChecks": [
+        {
+          "name": "Unit tests",
+          "status": "failed"
+        },
+        {
+          "name": "Regression tests",
+          "status": "passed"
+        }
+      ],
+      "evidenceSummary": {
+        "total": 2,
+        "noEvidenceProvided": false,
+        "passed": 1,
+        "failed": 1,
+        "missing": 0,
+        "notRun": 0,
+        "unknown": 0,
+        "missingOrNotRun": 0,
+        "invalid": 0
+      },
+      "reasons": [
+        "1 required evidence check(s) failed"
+      ],
+      "recommendation": "Do not proceed until failed checks or blocking risks are resolved."
+    }
+  }
+]
