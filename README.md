@@ -1,4 +1,4 @@
-# Agentia Release Guardian - Change Impact & Release Evidence
+﻿# Agentia Release Guardian - Change Impact & Release Evidence
 
 ## Overview
 
@@ -13,6 +13,16 @@ It evaluates supplied change, dependency, and test-evidence data and produces on
 The prototype is designed to make release reasoning easier to inspect. A decision includes a risk score, impacted components, dependency paths, evidence status, reasons, and a recommended next action.
 
 **Important:** The analyzer currently processes local JSON fixtures. It does not retrieve live Salesforce metadata, run Salesforce tests, deploy metadata, or authorize a release.
+
+## Key capabilities
+
+- **Explainable decisions:** show why a scenario results in GO, HOLD, or BLOCK.
+- **Dependency impact tracing:** identify direct and transitive downstream components, with readable paths and cycle protection.
+- **Evidence-aware review:** prevent missing, not-run, or unrecognized evidence from silently passing; failed required evidence results in BLOCK.
+- **Repeatable reporting:** generate JSON and Markdown reports from the same analysis.
+- **Automated validation:** test decision rules, dependency traversal, input validation, and report generation.
+
+These capabilities operate on supplied local fixture data in this prototype; live Salesforce metadata retrieval and test execution are not implemented.
 
 ## Problem
 
