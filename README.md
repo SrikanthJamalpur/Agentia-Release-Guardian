@@ -30,6 +30,23 @@ A change to one Salesforce component can affect other components that depend on 
 
 Release Guardian demonstrates how dependency traversal and evidence checks can be combined into a transparent, repeatable analysis rather than presenting a decision without explanation.
 
+## Architecture
+
+```mermaid
+flowchart TD
+    A["Local JSON fixtures<br/>fixtures/demo.json"] --> B["Input validation<br/>guardian.js"]
+    B --> C["Dependency impact analysis<br/>Direct and transitive paths"]
+    C --> D["Evidence and risk evaluation<br/>GO / HOLD / BLOCK"]
+    D --> E["CLI report generation<br/>cli.js"]
+    E --> F["JSON report"]
+    E --> G["Markdown report"]
+    H["Automated tests<br/>Node.js test runner"] -. "Validate behavior" .-> B
+    H -.-> D
+    H -.-> E
+```
+
+The diagram represents the current local implementation. It does not imply a live connection to Salesforce or Copado.
+
 ## How it works
 
 The prototype is located in `release-guardian/`.
@@ -130,7 +147,7 @@ The reports include decisions, risk scores, changed and impacted components, dep
 
 ## Tests
 
-The Release Guardian test suite uses Node's built-in test runner. The latest verified demo run passed **13 tests with zero failures**.
+The Release Guardian test suite uses Node's built-in test runner. The latest verified test run passed **16 tests with zero failures**.
 
 Run the tests again after making changes to verify the current state of the project.
 
