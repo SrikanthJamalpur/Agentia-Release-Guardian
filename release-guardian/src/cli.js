@@ -1,8 +1,9 @@
-"use strict";
+﻿"use strict";
 
 const fs = require("node:fs");
 const path = require("node:path");
 const { analyzeRelease, formatMarkdown } = require("./guardian");
+const { analyzeCopadoStory } = require("./copado");
 
 function generateReports(inputPath, reportsDir) {
   let demo;
@@ -48,12 +49,57 @@ function generateReports(inputPath, reportsDir) {
   return { scenarioCount: results.length, jsonPath, mdPath, results };
 }
 
+
 function main() {
-  const inputPath = path.join(__dirname, "..", "fixtures", "demo.json");
+  const args = process.argv.slice(2);
   const reportsDir = path.join(__dirname, "..", "reports");
 
   try {
+    if (args[0] === "--copado") {
+      if (!args[1]) {
+        throw new Error(
+          "Usage: npm run guardian -- --copado US-0000024"
+        );
+      }
+
+      const output = analyzeCopadoStory(args[1]);
+
+      fs.mkdirSync(reportsDir, { recursive: true });
+
+      const jsonPath = path.join(
+        reportsDir,
+        "copado-release-guardian-report.json"
+      );
+      const mdPath = path.join(
+        reportsDir,
+        "copado-release-guardian-report.md"
+      );
+
+            fs.writeFileSync(
+        jsonPath,
+        JSON.stringify({
+          source: output.source,
+          story: output.story,
+          report: output.report,
+          releasePassport: output.releasePassport
+        }, null, 2),
+        "utf8"
+      );
+
+      fs.writeFileSync(mdPath, output.markdown, "utf8");
+
+      console.log(`Copado story: ${output.story.id}`);
+      console.log(`Decision: ${output.report.decision}`);
+      console.log(`Risk score: ${output.report.riskScore}/100`);
+      console.log(`JSON report: ${jsonPath}`);
+      console.log(`Markdown report: ${mdPath}`);
+      console.log("Read-only analysis; no deployment or promotion was triggered.");
+      return;
+    }
+
+    const inputPath = path.join(__dirname, "..", "fixtures", "demo.json");
     const output = generateReports(inputPath, reportsDir);
+
     console.log(`Release Guardian completed. Scenarios: ${output.scenarioCount}`);
     console.log(`JSON report: ${output.jsonPath}`);
     console.log(`Markdown report: ${output.mdPath}`);
@@ -62,6 +108,7 @@ function main() {
     process.exitCode = 1;
   }
 }
+
 
 if (require.main === module) {
   main();

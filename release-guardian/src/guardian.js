@@ -152,21 +152,51 @@ function analyzeRelease(scenario) {
   }
 
   const reasons = [];
-  if (failed.length) reasons.push(`${failed.length} evidence check(s) failed`);
-  if (missingCount) {
-    reasons.push(evidence.length === 0
-      ? "No evidence checks were provided"
-      : `${missingCount} evidence check(s) missing or not run`);
+
+  if (failed.length) {
+    reasons.push(`${failed.length} evidence check(s) failed`);
+    for (const item of failed) {
+      reasons.push(`Failed evidence: ${item.name}`);
+    }
   }
-  if (invalid.length) reasons.push(`${invalid.length} evidence check(s) have an unknown status`);
+
+  if (missingCount) {
+    reasons.push(
+      evidence.length === 0
+        ? "No evidence checks were provided"
+        : `${missingCount} evidence check(s) missing or not run`
+    );
+
+    for (const item of missing) {
+      reasons.push(
+        `${item.status === "missing" ? "Missing" : "Not run"} evidence: ${item.name}`
+      );
+    }
+
+    if (evidence.length === 0) {
+      reasons.push("Provide the required release evidence before review");
+    }
+  }
+
+  if (invalid.length) {
+    reasons.push(`${invalid.length} evidence check(s) have an unknown status`);
+    for (const item of invalid) {
+      reasons.push(`Unrecognized evidence status "${item.status}": ${item.name}`);
+    }
+  }
+
   if (findings.length) {
     reasons.push(`${findings.length} unique downstream component(s) identified`);
   }
+
   if (riskScore >= HOLD_THRESHOLD) {
     reasons.push(`Risk score ${riskScore}/100 requires review`);
   }
+
   if (!reasons.length) {
-    reasons.push("Evidence is complete and the calculated risk is below the review threshold");
+    reasons.push(
+      "Evidence is complete and the calculated risk is below the review threshold"
+    );
   }
 
   const evidenceStatuses = {
@@ -194,9 +224,9 @@ function analyzeRelease(scenario) {
     },
     reasons,
     recommendation: decision === "GO"
-      ? "Proceed to the authorized release process; this analysis is not deployment approval."
+      ? "The analyzed checks passed. Follow the organization's approval process before deployment; this analysis is not deployment approval."
       : decision === "HOLD"
-        ? "Collect missing or valid evidence and review the impact before proceeding."
+        ? "Confirm release readiness, obtain the relevant Copado job execution and automated test results, and rerun the impact analysis before considering promotion."
         : "Do not proceed until failed checks or blocking risks are resolved."
   };
 }

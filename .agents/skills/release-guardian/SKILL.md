@@ -45,3 +45,13 @@ For every run, state:
 - Any limitations or manual steps still required.
 
 Never fabricate results, integrations, test executions, approvals, or metrics.
+
+## Copado story review
+
+When a Copado story review is requested:
+
+1. Run `npm --prefix .\release-guardian run guardian -- --copado US-0000024`, replacing the example story ID with a user-provided or verified story ID.
+2. Inspect `release-guardian/reports/copado-release-guardian-report.json` and `release-guardian/reports/copado-release-guardian-report.md`.
+3. Treat the result as a read-only review of allowlisted Copado story context.
+4. Clearly report missing or unverified job, test, and impact evidence.
+5. Do not infer zero impact from unavailable component data, or claim that tests passed, deployment occurred, or release approval was granted.

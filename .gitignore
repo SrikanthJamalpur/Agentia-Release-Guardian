@@ -53,3 +53,6 @@ $RECYCLE.BIN/
 # Temporary local backups
 README.md.bak
 release-guardian/fixtures/*.bak
+
+# Temporary hackathon submission review files
+submission-review-backup/

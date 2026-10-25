@@ -26,7 +26,7 @@
 ## Decision reasons
 - Evidence is complete and the calculated risk is below the review threshold
 
-**Recommended next action:** Proceed to the authorized release process; this analysis is not deployment approval.
+**Recommended next action:** The analyzed checks passed. Follow the organization's approval process before deployment; this analysis is not deployment approval.
 
 ---
 
@@ -58,10 +58,11 @@
 
 ## Decision reasons
 - 1 evidence check(s) missing or not run
+- Missing evidence: Regression tests
 - 2 unique downstream component(s) identified
 - Risk score 57/100 requires review
 
-**Recommended next action:** Collect missing or valid evidence and review the impact before proceeding.
+**Recommended next action:** Confirm release readiness, obtain the relevant Copado job execution and automated test results, and rerun the impact analysis before considering promotion.
 
 ---
 
@@ -92,5 +93,6 @@
 
 ## Decision reasons
 - 1 evidence check(s) failed
+- Failed evidence: Unit tests
 
 **Recommended next action:** Do not proceed until failed checks or blocking risks are resolved.

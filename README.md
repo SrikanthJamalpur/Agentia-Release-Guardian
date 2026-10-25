@@ -1,4 +1,4 @@
-﻿# Agentia Release Guardian - Change Impact & Release Evidence
+# Agentia Release Guardian - Change Impact & Release Evidence
 
 ## Overview
 
@@ -147,7 +147,7 @@ The reports include decisions, risk scores, changed and impacted components, dep
 
 ## Tests
 
-The Release Guardian test suite uses Node's built-in test runner. The latest verified test run passed **16 tests with zero failures**.
+The Release Guardian test suite uses Node's built-in test runner. The latest verified test run passed **20 tests with zero failures**.
 
 Run the tests again after making changes to verify the current state of the project.
 
@@ -171,26 +171,26 @@ No release promotion, deployment, or production mutation is performed by the loc
 
 ```text
 release-guardian/
+  package.json
+  package-lock.json
   fixtures/
     demo.json
   src/
     guardian.js
     cli.js
+    copado.js
   test/
     guardian.test.js
+    copado.test.js
   reports/
     release-guardian-report.json
     release-guardian-report.md
+    copado-release-guardian-report.json
+    copado-release-guardian-report.md
 
 scripts/
   run-release-guardian-demo.ps1
-
-.agents/
-  skills/
-    agentia-cicd/
-    release-guardian/
 ```
-
 ## Project goal
 
 Demonstrate an explainable, testable approach to Salesforce release risk analysis, with readable direct and transitive impact paths, explicit evidence handling, deterministic decisions, and clear limitations.

@@ -1,0 +1,118 @@
+{
+  "source": "Copado via Agentia CLI",
+  "story": {
+    "id": "US-0000024",
+    "title": "My first Source Format User Story",
+    "status": "Draft",
+    "project": "Trial - Salesforce Source Format",
+    "pipeline": "Trial - Salesforce Source Format Pipeline",
+    "testLevel": "NoTestRun",
+    "hasApexCode": false,
+    "lastValidationDate": "2026-10-23T18:48:54Z"
+  },
+  "report": {
+    "scenario": "Copado US-0000024: My first Source Format User Story",
+    "decision": "HOLD",
+    "riskScore": 25,
+    "changedComponents": null,
+    "impactedComponents": null,
+    "dependencyFindings": [],
+    "evidenceChecks": [
+      {
+        "name": "Copado story is in a release-ready state",
+        "status": "missing"
+      },
+      {
+        "name": "Related Copado job execution evidence",
+        "status": "missing"
+      },
+      {
+        "name": "Required automated test evidence",
+        "status": "missing"
+      },
+      {
+        "name": "Story status",
+        "status": "not-run"
+      }
+    ],
+    "evidenceSummary": {
+      "total": 4,
+      "noEvidenceProvided": false,
+      "passed": 0,
+      "failed": 0,
+      "missing": 3,
+      "notRun": 1,
+      "unknown": 0,
+      "missingOrNotRun": 4,
+      "invalid": 0
+    },
+    "reasons": [
+      "4 evidence check(s) missing or not run",
+      "Missing evidence: Copado story is in a release-ready state",
+      "Missing evidence: Related Copado job execution evidence",
+      "Missing evidence: Required automated test evidence",
+      "Not run evidence: Story status"
+    ],
+    "recommendation": "Confirm release readiness, obtain the relevant Copado job execution and automated test results, and rerun the impact analysis before considering promotion."
+  },
+  "releasePassport": {
+    "passportVersion": "1.0",
+    "generatedAt": "2026-10-25T12:20:02.678Z",
+    "source": "Copado via Agentia CLI",
+    "story": {
+      "id": "US-0000024",
+      "title": "My first Source Format User Story",
+      "status": "Draft",
+      "project": "Trial - Salesforce Source Format",
+      "pipeline": "Trial - Salesforce Source Format Pipeline",
+      "testLevel": "NoTestRun",
+      "hasApexCode": false,
+      "lastValidationDate": "2026-10-23T18:48:54Z"
+    },
+    "impactAssessment": {
+      "status": "NOT_ASSESSED",
+      "changedComponents": null,
+      "impactedComponents": null,
+      "reason": "Live changed-component and dependency data were not retrieved. Zero components in the local analysis must not be interpreted as zero real-world impact."
+    },
+    "evidenceLedger": [
+      {
+        "name": "Copado story is in a release-ready state",
+        "status": "missing",
+        "verifiedFromCopado": false
+      },
+      {
+        "name": "Related Copado job execution evidence",
+        "status": "missing",
+        "verifiedFromCopado": false
+      },
+      {
+        "name": "Required automated test evidence",
+        "status": "missing",
+        "verifiedFromCopado": false
+      },
+      {
+        "name": "Story status",
+        "status": "not-run",
+        "verifiedFromCopado": false
+      }
+    ],
+    "decision": "HOLD",
+    "riskScore": 25,
+    "reasons": [
+      "4 evidence check(s) missing or not run",
+      "Missing evidence: Copado story is in a release-ready state",
+      "Missing evidence: Related Copado job execution evidence",
+      "Missing evidence: Required automated test evidence",
+      "Not run evidence: Story status"
+    ],
+    "recommendation": "Confirm release readiness, obtain the relevant Copado job execution and automated test results, and rerun the impact analysis before considering promotion.",
+    "analysisScope": {
+      "storyContextRetrieved": true,
+      "liveMetadataRetrieved": false,
+      "liveDependencyAnalysisPerformed": false,
+      "automatedTestResultsRetrieved": false,
+      "deploymentTriggered": false
+    }
+  }
+}

@@ -34,7 +34,7 @@
       "reasons": [
         "Evidence is complete and the calculated risk is below the review threshold"
       ],
-      "recommendation": "Proceed to the authorized release process; this analysis is not deployment approval."
+      "recommendation": "The analyzed checks passed. Follow the organization's approval process before deployment; this analysis is not deployment approval."
     }
   },
   {
@@ -96,10 +96,11 @@
       },
       "reasons": [
         "1 evidence check(s) missing or not run",
+        "Missing evidence: Regression tests",
         "2 unique downstream component(s) identified",
         "Risk score 57/100 requires review"
       ],
-      "recommendation": "Collect missing or valid evidence and review the impact before proceeding."
+      "recommendation": "Confirm release readiness, obtain the relevant Copado job execution and automated test results, and rerun the impact analysis before considering promotion."
     }
   },
   {
@@ -135,7 +136,8 @@
         "invalid": 0
       },
       "reasons": [
-        "1 evidence check(s) failed"
+        "1 evidence check(s) failed",
+        "Failed evidence: Unit tests"
       ],
       "recommendation": "Do not proceed until failed checks or blocking risks are resolved."
     }
